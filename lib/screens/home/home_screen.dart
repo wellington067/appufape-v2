@@ -1,3 +1,4 @@
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
 import 'package:thunderapp/assets/index.dart';
 import 'package:thunderapp/components/utils/horizontal_spacer_box.dart';
@@ -12,11 +13,24 @@ import 'package:thunderapp/shared/constants/style_constants.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
+final rota = "1";
+
+ readQRCode() async {
+    String rota = await FlutterBarcodeScanner.scanBarcode("#FFFFFF", "Cancelar", false, ScanMode.QR, );
+
+    setState(() => rota = rota != '-1' ? rota : 'Não validado');
+    
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     int selectedIndex = 0;
@@ -402,9 +416,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 const HorizontalSpacerBox(
                                     size: SpacerSize.large),
                                 InkWell(
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, Screens.qrcode);
+                                    onTap: () {readQRCode();
+
+                                    
+                                          switch(rota) {
+                                            case "1": Navigator.pushNamed(context, Screens.bcc);
+                                            break;
+                                            case "2": Navigator.pushNamed(context, Screens.agronomia);
+                                            break;
+                                            case "3": Navigator.pushNamed(context, Screens.zootecniaPage);
+                                            break;
+                                          }
+                                      
+                                    // if(rota == "nome") {
+                                    // Navigator.pushNamed(context, Screens.qrcode);
+                                    // }
                                     },
                                     child: Row(
                                       children: [
