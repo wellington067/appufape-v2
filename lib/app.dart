@@ -1,3 +1,4 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:thunderapp/screens/menu/menu.dart';
 import 'package:thunderapp/screens/pages/calendario/calendario_page.dart';
 import 'package:thunderapp/screens/pages/contatos/contatos_page.dart';
@@ -49,6 +50,14 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'App UFAPE',
       // ignore: deprecated_member_use
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const  [
+         Locale('pt', 'BR'), // Português do Brasil
+      ],
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: (context, child) {
